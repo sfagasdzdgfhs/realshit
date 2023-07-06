@@ -1,11 +1,13 @@
 window.HackSettings = {
     log: false,
-    ExecDelay: 80,
+    ExecDelay: 50,
     lastExec: 0,
     AutoSpike: {
         enabled: false, 
-        extra: 20,
+        extra: 15,
         mode: true,
+        canSend: true,
+        lastSend: 0,
         draw: true,
         key: "Space",
         changeModeKey: "KeyZ",
@@ -92,10 +94,12 @@ setTimeout(() => {
                                 client.socket.send(JSON.stringify([102, type, realAngle, 0]))
                         break;
 
-                        case true:                            
-                            for (let extra = -HackSettings.AutoSpike.extra; extra <= HackSettings.AutoSpike.extra; extra += 4) {
+                        case true:
+                            if(!window.HackSettings.AutoSpike.canSend) break;
+                            for (let extra = -HackSettings.AutoSpike.extra; extra <= HackSettings.AutoSpike.extra; extra += 1) {
                                 client.socket.send(JSON.stringify([102, type, (realAngle - extra + 255) % 255, 0]))
                             }
+                            window.HackSettings.AutoSpike.lastSend = performance.now();
                         break;
                     }
         
@@ -57148,6 +57152,11 @@ setTimeout(() => {
             window.HackSettings.log && console.log("Delay: ", Math.floor(timestamp - window.HackSettings.lastExec))
             CheatInterval();
             window.HackSettings.lastExec = timestamp;
+        }
+        if (performance.now() - window.HackSettings.AutoSpike.lastSend >= 500) {
+            window.HackSettings.AutoSpike.canSend = true;
+        } else {
+            window.HackSettings.AutoSpike.canSend = false;
         }
         delta = (timestamp - old_timestamp) / 1000;
         old_timestamp = timestamp;
