@@ -1,51 +1,9 @@
-window.HackSettings = {
-    log: false,
-    ExecDelay: 0,
-    lastExec: 0,
-    AutoSpike: {
-        enabled: false, 
-        extra: 15,
-        mode: true,
-        canSend: true,
-        delay: 200,
-        lastSend: 0,
-        draw: true,
-        key: "Space",
-        changeModeKey: "KeyZ",
-        preferences: [
-            "Reidite Spike",
-            "Amethyst Spike",
-            "Diamond Spike",
-            "Gold Spike",
-            "Stone Spike",
-            "Wood Spike",
-            "Wood Wall",
-            "Nothing",
-        ],
-    },
-    DropSword: {
-        enabled: false,
-        draw: true,
-        key: "ShiftLeft"
-    },
-    ColoredSpikes: {
-        enabled: true,
-        draw: false,
-    },
-    ListEnabledHacks: {
-        enabled: true,
-        draw: false
-    },
-    AutoRespawn: {
-        enabled: true,
-        draw: true
-    }
-}
-
-
-
-
 setTimeout(() => {
+
+    let TimerTools = {
+        HPTimer: 0,
+        GaugeTimer: 0
+    };
 
    function CheatInterval () {
 
@@ -152,16 +110,436 @@ setTimeout(() => {
             };
             return 0;
         },
+        /*
+        InitializeGUI: () => {
+            let gui = new guify({
+                title: "🐉",
+                theme: {
+                    name: "🐉",
+                    colors: {
+                        panelBackground: "rgb(0,0,0)",
+                        componentBackground: "rgb(42, 10, 87)",
+                        componentForeground: "rgb(131, 96, 235)",
+                        textPrimary: "rgb(102, 31, 143)",
+                        textSecondary: "rgb(255, 255, 255)",
+                        textHover: "rgb(102, 31, 143)"
+                    },
+                    font: {
+                        fontFamily: "Baloo Paaji",
+                        fontSize: "20px",
+                        fontWeight: "1"
+                    }
+                },
+                align: "right",
+                width: "28%",
+                barMode: "none",
+                panelMode: "none",
+                opacity: 1,
+                open: false,
+            });
+            gui.Register({
+                type: "folder",
+                label: "Visuals",
+                open: false,
+            });
+            gui.Register({
+                type: "folder",
+                label: "Misc",
+                open: false,
+            });
+            gui.Register({
+                type: "folder",
+                label: "AutoSpike",
+                open: false,
+            });
+    
+    
+            gui.Register([
+                {
+                    type: "button",
+                    label: "Set AutoSpike Key",
+                    action: (e) => {
+                        FnUtils.controls.setKeyBind("AutoSpike");
+                    },
+                },
+                {
+                    type: "display",
+                    label: "AutoSpike Key:",
+                    object: HackSettings.AutoSpike,
+                    property: "key",
+                },
+                {
+                    type: "select",
+                    label: "1",
+                    object: HackSettings.AutoSpike.preferences,
+                    property: "0",
+                    options: [
+                        "Reidite Spike",
+                        "Amethyst Spike",
+                        "Diamond Spike",
+                        "Gold Spike",
+                        "Stone Spike",
+                        "Wood Spike",
+                        "Wood Wall",
+                        "Nothing",
+                    ],
+                    onChange: (e) => {
+                        FnUtils.saveSettings();
+                    },
+                },
+                {
+                    type: "select",
+                    label: "2",
+                    object: HackSettings.AutoSpike.preferences,
+                    property: "1",
+                    options: [
+                        "Reidite Spike",
+                        "Amethyst Spike",
+                        "Diamond Spike",
+                        "Gold Spike",
+                        "Stone Spike",
+                        "Wood Spike",
+                        "Wood Wall",
+                        "Nothing",
+                    ],
+                    onChange: (e) => {
+                        FnUtils.saveSettings();
+                    },
+                },
+                {
+                    type: "select",
+                    label: "3",
+                    object: HackSettings.AutoSpike.preferences,
+                    property: "2",
+                    options: [
+                        "Reidite Spike",
+                        "Amethyst Spike",
+                        "Diamond Spike",
+                        "Gold Spike",
+                        "Stone Spike",
+                        "Wood Spike",
+                        "Wood Wall",
+                        "Nothing",
+                    ],
+                    onChange: (e) => {
+                        FnUtils.saveSettings();
+                    },
+                },
+                {
+                    type: "select",
+                    label: "4",
+                    object: HackSettings.AutoSpike.preferences,
+                    property: "3",
+                    options: [
+                        "Reidite Spike",
+                        "Amethyst Spike",
+                        "Diamond Spike",
+                        "Gold Spike",
+                        "Stone Spike",
+                        "Wood Spike",
+                        "Wood Wall",
+                        "Nothing",
+                    ],
+                    onChange: (e) => {
+                        FnUtils.saveSettings();
+                    },
+                },
+                {
+                    type: "select",
+                    label: "5",
+                    object: HackSettings.AutoSpike.preferences,
+                    property: "4",
+                    options: [
+                        "Reidite Spike",
+                        "Amethyst Spike",
+                        "Diamond Spike",
+                        "Gold Spike",
+                        "Stone Spike",
+                        "Wood Spike",
+                        "Wood Wall",
+                        "Nothing",
+                    ],
+                    onChange: (e) => {
+                        FnUtils.saveSettings();
+                    },
+                },
+                {
+                    type: "select",
+                    label: "6",
+                    object: HackSettings.AutoSpike.preferences,
+                    property: "5",
+                    options: [
+                        "Reidite Spike",
+                        "Amethyst Spike",
+                        "Diamond Spike",
+                        "Gold Spike",
+                        "Stone Spike",
+                        "Wood Spike",
+                        "Wood Wall",
+                        "Nothing",
+                    ],
+                    onChange: (e) => {
+                        FnUtils.saveSettings();
+                    },
+                },
+                {
+                    type: "select",
+                    label: "7",
+                    object: HackSettings.AutoSpike.preferences,
+                    property: "6",
+                    options: [
+                        "Reidite Spike",
+                        "Amethyst Spike",
+                        "Diamond Spike",
+                        "Gold Spike",
+                        "Stone Spike",
+                        "Wood Spike",
+                        "Wood Wall",
+                        "Nothing",
+                    ],
+                    onChange: (e) => {
+                        FnUtils.saveSettings();
+                    },
+                },
+            ],
+            {
+                folder: "AutoSpike",
+            });
+            gui.Register([
+                {
+                    type: "checkbox",
+                    label: "PlayerOnTop",
+                    object: HackSettings.DrawPlayerOnTop,
+                    property: "enabled",
+                    onChange: (e) => {
+                        FnUtils.saveSettings();
+                    },
+                },
+                {
+                    type: "checkbox",
+                    label: "Timers",
+                    object: HackSettings.Timer,
+                    property: "enabled",
+                    onChange: (e) => {
+                        FnUtils.saveSettings();
+                    },
+                },
+                {
+                    type: "checkbox",
+                    label: "ColoredSpikes",
+                    object: HackSettings.ColoredSpikes,
+                    property: "enabled",
+                    onChange: (e) => {
+                        FnUtils.saveSettings();
+                    },
+                },
+                {
+                    type: "checkbox",
+                    label: "ListEnabledHacks",
+                    object: HackSettings.ListEnabledHacks,
+                    property: "enabled",
+                    onChange: (e) => {
+                        FnUtils.saveSettings();
+                    },
+                },
+                {
+                    type: "checkbox",
+                    label: "DrawItemsOnChest",
+                    object: HackSettings.DrawItemsOnChest,
+                    property: "enabled",
+                    onChange: (e) => {
+                        FnUtils.saveSettings();
+                    },
+                },
+                {
+                    type: "checkbox",
+                    label: "DrawBoxesOnTop",
+                    object: HackSettings.DrawBoxesOnTop,
+                    property: "enabled",
+                    onChange: (e) => {
+                        FnUtils.saveSettings();
+                    },
+                },
+                {
+                    type: "checkbox",
+                    label: "DrawChestsOnTop",
+                    object: HackSettings.ChestOnTop,
+                    property: "enabled",
+                    onChange: (e) => {
+                    FnUtils.saveSettings();
+                    },
+                },
+                {
+                    type: "checkbox",
+                    label: "DropOrDeadBox",
+                    object: HackSettings.DropOrDeadBox,
+                    property: "enabled",
+                    onChange: (e) => {
+                        FnUtils.saveSettings();
+                    },
+                },
+                {
+                    type: "checkbox",
+                    label: "BuildingInfo",
+                    object: HackSettings.BuildingInfo,
+                    property: "enabled",
+                    onChange: (e) => {
+                        FnUtils.saveSettings();
+                    },
+                },
+                {
+                    type: "button",
+                    label: "Set Xray Key",
+                    action: e => {
+                        FnUtils.controls.setKeyBind("Xray")
+                    }
+                }, {
+                    type: "display",
+                    label: "Xray Key:",
+                    object: HackSettings.Xray,
+                    property: "key"
+                },
+                {
+                    type: "range",
+                    label: "Xray Opacity",
+                    min: 0,
+                    max: 1,
+                    step: .1,
+                    object: HackSettings.Xray,
+                    property: "opacity",
+                    onChange: e => {
+                        FnUtils.saveSettings()
+                    }
+                },
+                {
+                    type: "range",
+                    label: "Zoom Range X",
+                    min: 1,
+                    max: 1000,
+                    step: 10,
+                    object: HackSettings.Zoom,
+                    property: "xSlider",
+                    onChange: e => {
+                        FnUtils.saveSettings()
+                    }
+                },
+                {
+                    type: "range",
+                    label: "Zoom Range Y",
+                    min: 1,
+                    max: 1000,
+                    step: 10,
+                    object: HackSettings.Zoom,
+                    property: "ySlider",
+                    onChange: e => {
+                        FnUtils.saveSettings()
+                    }
+                },
+            ],
+            {
+                folder: "Visuals",
+            });
+            gui.Register([
+                {
+                    type: "checkbox",
+                    label: "AutoEatBands",
+                    object: HackSettings.AutoBand,
+                    property: "enabled",
+                    onChange: (e) => {
+                        FnUtils.saveSettings();
+                    },
+                },
+                {
+                    type: "checkbox",
+                    label: "CipherMessage",
+                    object: HackSettings.CipherMessage,
+                    property: "enabled",
+                    onChange: (e) => {
+                        FnUtils.saveSettings();
+                    },
+                },
+                {
+                    type: "text",
+                    label: "Cipher Key",
+                    object: HackSettings.CipherMessage,
+                    property: "cipherKey",
+                    listenMode: 'input',
+                    onChange: (data) => {
+                        FnUtils.saveSettings();
+                    }
+                },
+                {
+                    type: "text",
+                    label: "Cipher Prefix",
+                    object: HackSettings.CipherMessage,
+                    property: "prefix",
+                    listenMode: 'input',
+                    onChange: (data) => {
+                        FnUtils.saveSettings();
+                    }
+                },
+                {
+                    type: "checkbox",
+                    label: "AutoRespawn",
+                    object: HackSettings.AutoRespawn,
+                    property: "enabled",
+                    onChange: (e) => {
+                        FnUtils.saveSettings();
+                    },
+                },
+                {
+                    type: "button",
+                    label: "Set DropSword Key",
+                    action: (e) => {
+                        FnUtils.controls.setKeyBind("DropSword");
+                    },
+                },
+                {
+                    type: "display",
+                    label: "DropSword Key:",
+                    object: HackSettings.DropSword,
+                    property: "key",
+                },
+            ],
+            {
+                folder: "Misc",
+            });
+        },
+        */
         saveSettings: () => {
             for (let e in HackSettings)
-                localStorage.setItem(e + "C", JSON.stringify(HackSettings[e]));
+                localStorage.setItem(e + "Client", JSON.stringify(HackSettings[e]));
         },
-        loadSettings: () => {
-            for (let e in HackSettings) {
-                let o = localStorage.getItem(e + "C");
-                o && (HackSettings[e] = JSON.parse(o));
+        /*
+        controls: null,
+        controller: class {
+            setKeyBind(e) {
+                HackSettings[e].key = "Press Any Key";
+                let o = 0;
+                document.addEventListener("keydown", function i(t) {
+                    o++,
+                        o >= 1 &&
+                        ("Escape" == t.code
+                         ? (HackSettings[e].key = "NONE")
+                         : (HackSettings[e].key = t.code),
+                         document.removeEventListener("keydown", i),
+                         FnUtils.saveSettings());
+                });
             }
         },
+        LoadHack: () => {
+            
+            (FnUtils.controls = new FnUtils.controller());
+            
+            let GGGGGGG = document.createElement("script");
+            GGGGGGG.src = "https://unpkg.com/guify@0.12.0/lib/guify.min.js";
+            (GGGGGGG.onload = function () {
+                FnUtils.InitializeGUI();
+            }),
+            document.body.appendChild(GGGGGGG);
+        
+        },
+        */
         checkAlly: (id) => {
             for (var i = 0; i < user.team.length; i++)
                 if (user.team[i] == id) return 1;
@@ -38328,6 +38706,21 @@ setTimeout(() => {
             ctx.fillStyle = "#9C4036";
             ctx.fillRect(this.translate.x + (517 * scale), this.translate.y + (17 * scale), (( user.gauges.warm.x) * 178) * scale, 18 * scale);
         }
+        if (HackSettings.BarTimers.enabled) {
+            let date = Date.now();
+            ctx.save();
+            ctx.font = '34px Baloo Paaji';
+            ctx.strokeStyle = "black";
+            ctx.fillStyle = "red";
+            ctx.lineWidth = 7;
+            ctx.strokeText(user.gauges.realhp + "hp", this.translate.x - 80 * scale, this.translate.y + 35 * scale);
+            ctx.fillText(user.gauges.realhp + "hp", this.translate.x - 80 * scale, this.translate.y + 35 * scale);
+            ctx.strokeText(Math.floor(11 - (date - TimerTools.HPTimer) / 1000) + "s", this.translate.x + 216 * scale, this.translate.y + 35 * scale);
+            ctx.fillText(Math.floor(11 - (date - TimerTools.HPTimer) / 1000) + "s", this.translate.x + 216 * scale, this.translate.y + 35 * scale);
+            ctx.strokeText(Math.floor(6 - (date - TimerTools.GaugeTimer) / 1000) + "s", this.translate.x + 460 * scale, this.translate.y + 35 * scale);
+            ctx.fillText(Math.floor(6 - (date - TimerTools.GaugeTimer) / 1000) + "s", this.translate.x + 460 * scale, this.translate.y + 35 * scale);
+            ctx.restore();
+        };
         if (user.gauges.thirst.x < 0.35) {
             ctx.fillStyle = "#001A57";
             ctx.globalAlpha = user.gauges.warn_thirst.v;
@@ -41620,6 +42013,61 @@ setTimeout(() => {
                 draw_bg_transition(furnace[i]);
 
         }
+        if (!HackSettings.DrawPlayerOnTop.enabled) {
+            var players = world.units[ITEMS.PLAYERS];
+            for (var i = 0; i < players.length; i++) {
+                var p = players[i];
+                if (((((players[i].vehicle !== INV.BABY_DRAGON) && (players[i].vehicle !== INV.BABY_LAVA)) && (players[i].vehicle !== INV.HAWK)) && (players[i].vehicle !== INV.PLANE)) && (players[i].vehicle !== INV.NIMBUS)) {
+                    if (p.tower === 0) {
+                        if (p.tower_fx > 0.001) {
+                            p.tower_fx = Utils.lerp(p.tower_fx, 0, 0.018);
+                            var spd = 1 + (0.18 * Math.min(1, Math.max(p.tower_fx, 0) / 100));
+                            ctx.save();
+                            ctx.scale(spd, spd);
+                            user.cam.x /= spd;
+                            user.cam.y /= spd;
+                            p.x /= spd;
+                            p.y /= spd;
+                            p.r.x /= spd;
+                            p.r.y /= spd;
+                            p.draw_vehicle();
+                            p.draw();
+                            user.cam.x *= spd;
+                            user.cam.y *= spd;
+                            p.x *= spd;
+                            p.y *= spd;
+                            p.r.x *= spd;
+                            p.r.y *= spd;
+                            ctx.restore();
+                        } else {
+                            p.fly = 0;
+                            p.draw_vehicle();
+                            p.draw();
+                        }
+                    }
+                } else if (p.speed <= 180) {
+                    ctx.save();
+                    var spd = 1 + (0.35 * Math.min(1, Math.max(p.vehicle_fx5 - 30, 0) / 180));
+                    ctx.scale(spd, spd);
+                    user.cam.x /= spd;
+                    user.cam.y /= spd;
+                    p.x /= spd;
+                    p.y /= spd;
+                    p.r.x /= spd;
+                    p.r.y /= spd;
+                    p.fly = 0;
+                    p.draw_vehicle();
+                    p.draw();
+                    user.cam.x *= spd;
+                    user.cam.y *= spd;
+                    p.x *= spd;
+                    p.y *= spd;
+                    p.r.x *= spd;
+                    p.r.y *= spd;
+                    ctx.restore();
+                }
+            }
+        }
         var fire = world.units[ITEMS.FIRE];
         for (var i = 0; i < fire.length; i++) {
             draw_bg_transition(fire[i], SPRITE.WOOD_FIRE);
@@ -42239,57 +42687,59 @@ setTimeout(() => {
         for (var i = 0; i < vulture.length; i++)
             draw_transition(vulture[i], SPRITE.VULTURE, SPRITE.HURT_VULTURE);
 
-        var players = world.units[ITEMS.PLAYERS];
-        for (var i = 0; i < players.length; i++) {
-            var p = players[i];
-            if (((((players[i].vehicle !== INV.BABY_DRAGON) && (players[i].vehicle !== INV.BABY_LAVA)) && (players[i].vehicle !== INV.HAWK)) && (players[i].vehicle !== INV.PLANE)) && (players[i].vehicle !== INV.NIMBUS)) {
-                if (p.tower === 0) {
-                    if (p.tower_fx > 0.001) {
-                        p.tower_fx = Utils.lerp(p.tower_fx, 0, 0.018);
-                        var spd = 1 + (0.18 * Math.min(1, Math.max(p.tower_fx, 0) / 100));
-                        ctx.save();
-                        ctx.scale(spd, spd);
-                        user.cam.x /= spd;
-                        user.cam.y /= spd;
-                        p.x /= spd;
-                        p.y /= spd;
-                        p.r.x /= spd;
-                        p.r.y /= spd;
-                        p.draw_vehicle();
-                        p.draw();
-                        user.cam.x *= spd;
-                        user.cam.y *= spd;
-                        p.x *= spd;
-                        p.y *= spd;
-                        p.r.x *= spd;
-                        p.r.y *= spd;
-                        ctx.restore();
-                    } else {
-                        p.fly = 0;
-                        p.draw_vehicle();
-                        p.draw();
+        if (HackSettings.DrawPlayerOnTop.enabled) {
+            var players = world.units[ITEMS.PLAYERS];
+            for (var i = 0; i < players.length; i++) {
+                var p = players[i];
+                if (((((players[i].vehicle !== INV.BABY_DRAGON) && (players[i].vehicle !== INV.BABY_LAVA)) && (players[i].vehicle !== INV.HAWK)) && (players[i].vehicle !== INV.PLANE)) && (players[i].vehicle !== INV.NIMBUS)) {
+                    if (p.tower === 0) {
+                        if (p.tower_fx > 0.001) {
+                            p.tower_fx = Utils.lerp(p.tower_fx, 0, 0.018);
+                            var spd = 1 + (0.18 * Math.min(1, Math.max(p.tower_fx, 0) / 100));
+                            ctx.save();
+                            ctx.scale(spd, spd);
+                            user.cam.x /= spd;
+                            user.cam.y /= spd;
+                            p.x /= spd;
+                            p.y /= spd;
+                            p.r.x /= spd;
+                            p.r.y /= spd;
+                            p.draw_vehicle();
+                            p.draw();
+                            user.cam.x *= spd;
+                            user.cam.y *= spd;
+                            p.x *= spd;
+                            p.y *= spd;
+                            p.r.x *= spd;
+                            p.r.y *= spd;
+                            ctx.restore();
+                        } else {
+                            p.fly = 0;
+                            p.draw_vehicle();
+                            p.draw();
+                        }
                     }
+                } else if (p.speed <= 180) {
+                    ctx.save();
+                    var spd = 1 + (0.35 * Math.min(1, Math.max(p.vehicle_fx5 - 30, 0) / 180));
+                    ctx.scale(spd, spd);
+                    user.cam.x /= spd;
+                    user.cam.y /= spd;
+                    p.x /= spd;
+                    p.y /= spd;
+                    p.r.x /= spd;
+                    p.r.y /= spd;
+                    p.fly = 0;
+                    p.draw_vehicle();
+                    p.draw();
+                    user.cam.x *= spd;
+                    user.cam.y *= spd;
+                    p.x *= spd;
+                    p.y *= spd;
+                    p.r.x *= spd;
+                    p.r.y *= spd;
+                    ctx.restore();
                 }
-            } else if (p.speed <= 180) {
-                ctx.save();
-                var spd = 1 + (0.35 * Math.min(1, Math.max(p.vehicle_fx5 - 30, 0) / 180));
-                ctx.scale(spd, spd);
-                user.cam.x /= spd;
-                user.cam.y /= spd;
-                p.x /= spd;
-                p.y /= spd;
-                p.r.x /= spd;
-                p.r.y /= spd;
-                p.fly = 0;
-                p.draw_vehicle();
-                p.draw();
-                user.cam.x *= spd;
-                user.cam.y *= spd;
-                p.x *= spd;
-                p.y *= spd;
-                p.r.x *= spd;
-                p.r.y *= spd;
-                ctx.restore();
             }
         }
         __effect += delta * 15;
@@ -44364,8 +44814,11 @@ setTimeout(() => {
             user.craft.update();
         };
         this.gauges = function (life, food, cold, thirst, oxygen, warm, bandage) {
+            if (Math.floor(11 - (Date.now() - TimerTools.HPTimer) / 1e3) < 5 || life / 100 > user.gauges.l) TimerTools.HPTimer = new Date().getTime();
+            TimerTools.GaugeTimer = new Date().getTime();
             user.gauges.l = life / 100;
             user.gauges.h = food / 100;
+            user.gauges.realhp = life * 2;
             user.gauges.c = cold / 100;
             user.gauges.t = thirst / 100;
             user.gauges.o = oxygen / 100;
@@ -44383,6 +44836,7 @@ setTimeout(() => {
         };
         this.gauges_life = function (life, bandage) {
             user.gauges.l = life / 100;
+            user.gauges.realhp = life * 2
             user.bandage = bandage;
         };
         this.gauges_water = function (water) {
@@ -45480,6 +45934,7 @@ setTimeout(() => {
             user.gauges.t = 1;
             user.gauges.o = 1;
             user.gauges.wa = 1;
+            user.gauges.realhp = 200;
             user.bigmap = false;
             game.info_box.display = 0;
             user.inv.can_select = [];
@@ -45730,6 +46185,8 @@ setTimeout(() => {
 
             }
             FnUtils.updateAllys();
+            TimerTools.HPTimer = new Date().getTime();
+            TimerTools.GaugeTimer = new Date().getTime();
         };
         this.connect = function () {
             this.timeout_number = 0;
@@ -48744,6 +49201,7 @@ setTimeout(() => {
             c: 1,
             l: 1,
             h: 1,
+            realhp: 200,
             t: 1,
             o: 1,
             wa: 1,
@@ -57241,8 +57699,7 @@ setTimeout(() => {
     }
     resize_canvas();
     draw(0);
-    FnUtils.loadSettings();
-    window.HackSettings.lastExec = 0;
-    window.HackSettings.AutoSpike.lastSend = 0;
+
+
 
 }, 1000)
