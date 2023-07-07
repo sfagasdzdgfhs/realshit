@@ -1,12 +1,13 @@
 window.HackSettings = {
     log: false,
-    ExecDelay: 50,
+    ExecDelay: 0,
     lastExec: 0,
     AutoSpike: {
         enabled: false, 
         extra: 15,
         mode: true,
         canSend: true,
+        delay: 200,
         lastSend: 0,
         draw: true,
         key: "Space",
@@ -96,7 +97,12 @@ setTimeout(() => {
 
                         case true:
                             if(!window.HackSettings.AutoSpike.canSend) break;
-                            for (let extra = -HackSettings.AutoSpike.extra; extra <= HackSettings.AutoSpike.extra; extra += 1) {
+                            for (let extra = 0; extra <= 2; extra += 1) {
+                                client.socket.send(JSON.stringify([102, type, realAngle, 0]))
+
+                            }
+                            for (let extra = 0; extra <= HackSettings.AutoSpike.extra; extra += 1) {
+                                client.socket.send(JSON.stringify([102, type, (extra + realAngle) % 255, 0]))
                                 client.socket.send(JSON.stringify([102, type, (realAngle - extra + 255) % 255, 0]))
                             }
                             window.HackSettings.AutoSpike.lastSend = performance.now();
@@ -107,9 +113,9 @@ setTimeout(() => {
             }
         }
     }
-    let FnUtils = {
+    window.FnUtils = {
         isPlayerHoldingWeapon: (a, b) => {
-            switch(a.right) {
+            switch(a.right)  {
                 case 34:
                 case 18:
                 case 33:
@@ -146,12 +152,14 @@ setTimeout(() => {
             };
             return 0;
         },
-        isInRadius: (myPlayer, Object) => {
-            var myPlayerX = Math.floor(myPlayer.x / 100);
-            var myPlayerY = Math.floor(myPlayer.y / 100);
-    
-            if (Object.Chunk[`${myPlayerX.toString() + myPlayerY.toString()}`]) {
-                return 1;
+        saveSettings: () => {
+            for (let e in HackSettings)
+                localStorage.setItem(e + "C", JSON.stringify(HackSettings[e]));
+        },
+        loadSettings: () => {
+            for (let e in HackSettings) {
+                let o = localStorage.getItem(e + "C");
+                o && (HackSettings[e] = JSON.parse(o));
             }
         },
         checkAlly: (id) => {
@@ -46960,16 +46968,6 @@ setTimeout(() => {
                 this.ally = user.id === this.pid || FnUtils.checkAlly(this.pid)
                 this.ObjectX = Math.floor(this.x / 100);
                 this.ObjectY = Math.floor(this.y / 100);
-                this.Chunk = {};
-                this.Chunk[`${this.ObjectX.toString() + this.ObjectY.toString()}`] = 1; //Middle square
-                this.Chunk[`${(this.ObjectX - 1).toString() + this.ObjectY.toString()}`] = 1; //Middle left square
-                this.Chunk[`${(this.ObjectX + 1).toString() + this.ObjectY.toString()}`] = 1; //Middle right square
-                this.Chunk[`${this.ObjectX.toString() + (this.ObjectY - 1).toString()}`] = 1; //Top mid square
-                this.Chunk[`${this.ObjectX.toString() + (this.ObjectY + 1).toString()}`] = 1; //Bot mid square
-                this.Chunk[`${(this.ObjectX - 1).toString() + (this.ObjectY - 1).toString()}`] = 1; //Top left square
-                this.Chunk[`${(this.ObjectX + 1).toString() + (this.ObjectY - 1).toString()}`] = 1; //Top right square
-                this.Chunk[`${(this.ObjectX - 1).toString() + (this.ObjectY + 1).toString()}`] = 1; //Bot left square
-                this.Chunk[`${(this.ObjectX + 1).toString() + (this.ObjectY + 1).toString()}`] = 1; //Bot right square
                 this.update = function (action) {
                     this.lock = (this.info > 8000) ? 1 : 0;
                     this.info = this.info > 8000 ? this.info - 8192 : this.info;
@@ -57153,7 +57151,7 @@ setTimeout(() => {
             CheatInterval();
             window.HackSettings.lastExec = timestamp;
         }
-        if (performance.now() - window.HackSettings.AutoSpike.lastSend >= 500) {
+        if (performance.now() - window.HackSettings.AutoSpike.lastSend >= window.HackSettings.AutoSpike.delay) {
             window.HackSettings.AutoSpike.canSend = true;
         } else {
             window.HackSettings.AutoSpike.canSend = false;
@@ -57243,4 +57241,8 @@ setTimeout(() => {
     }
     resize_canvas();
     draw(0);
+    FnUtils.loadSettings();
+    window.HackSettings.lastExec = 0;
+    window.HackSettings.AutoSpike.lastSend = 0;
+
 }, 1000)
